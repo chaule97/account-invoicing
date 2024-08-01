@@ -18,11 +18,8 @@ class SaleOrder(models.Model):
         """
         invoices = super()._create_invoices(grouped=grouped, final=final, date=date)
         for invoice in invoices.sudo():
-            if (
-                not invoice.company_id.always_create_invoice_section
-                and len(
-                    invoice.line_ids.mapped(invoice.line_ids._get_section_grouping())
-                )
+            if invoice.line_ids and (
+                len(invoice.line_ids.mapped(invoice.line_ids._get_section_grouping()))
                 == 1
             ):
                 continue
