@@ -1,9 +1,9 @@
 from odoo.tests import tagged
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
 @tagged("-at_install", "post_install")
-class Common(SavepointCase):
+class Common(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
